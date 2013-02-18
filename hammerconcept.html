@@ -1,0 +1,47 @@
+<head>
+  <title>hammerconcept</title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Hammer</h1>
+  </div>
+  
+  {{> script}}
+  
+</body>
+
+<template name="script">
+  <div class="container" id="script">
+    <h2 class="printhide">{{script.title}}</h2>
+    
+    <div class="coverpage displayhide">
+      <h1 class="title">{{script.title}}</h1>
+    </div>
+    
+    
+    {{#each script.elements}}
+      <div data-mongo-id="{{this._id}}" class="scriptelement {{this.type}}">
+        {{#if this.character}}
+          <div class="scriptelement character">
+            {{this.character}}
+          </div>
+          
+          {{{separateLines this.content 40}}}
+          
+        {{else}}
+        
+          {{this.content}}
+          
+        {{/if}} 
+         
+      </div>
+    {{/each}}
+    
+  </div>
+  <div class="container">
+    <textarea id="scriptinput"></textarea>
+  </div>
+</template>
+
+
