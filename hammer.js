@@ -61,6 +61,10 @@ function insertElement(input) {
       input   = input.trim();  
   var input_l = input.toLowerCase();
   
+  if (input == "") {
+    return false;
+  }
+  
   if (input_l.startsWith("int.") || input_l.startsWith("ext.")) {
     // Slugline
     data.type    = "slugline";
@@ -91,7 +95,7 @@ function insertElement(input) {
     data.content = input;
   }
   
-  Scripts.update({_id: Session.get("scriptid")}, {$push: {elements: data}});
+  return Scripts.update({_id: Session.get("scriptid")}, {$push: {elements: data}});
 }
 
 if (typeof String.prototype.startsWith != 'function') {
