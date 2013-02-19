@@ -10,7 +10,6 @@
   //overflow-y: scroll;
   //height: 350px;
   // temp!
-  //counter-reset: scene 0;
 }
 
 .scriptelement {
@@ -72,6 +71,10 @@
   .scriptelement.slugline {
     // Prefer to shove slugline on to new page than have it at bottom of page
     page-break-after: avoid;
+    
+    // PDF bookmarks
+    bookmark-level: 1;
+    bookmark-state: closed;
   }
   
   .coverpage {
@@ -88,6 +91,14 @@
     display: block;
   }
   @page {
+    counter-increment: page;
     size: A4 portrait;
+    margin: 1cm;
+    
+    @top-right {
+      font-family: "Courier New", Courier, monospace;
+      font-weight: bold;
+      content: counter(page);
+    }
   }
 }
