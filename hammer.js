@@ -39,13 +39,11 @@ if (Meteor.isClient) {
   }
   Handlebars.registerHelper('separateLines', function (input, chars) {
     var lines = separateLines(input, chars);
-    console.log(lines);
     var out = "";
     
     for (i = 0; i < lines.length; i++) {
       out = out + Handlebars._escape(lines[i]) + "<br />\n";
     }
-    console.log("---" + out);
     
     return out;
   });
@@ -59,8 +57,11 @@ if (Meteor.isServer) {
 }
 
 function insertElement(input) {
-  data = {};
-  if (input.toLowerCase().startsWith("int.") || input.toLowerCase().startsWith("ext.")) {
+  var data    = {};
+      input   = input.trim();  
+  var input_l = input.toLowerCase();
+  
+  if (input_l.startsWith("int.") || input_l.startsWith("ext.")) {
     // Slugline
     data.type    = "slugline";
     data.content = input;
@@ -69,8 +70,8 @@ function insertElement(input) {
     // Dialogue
     var index = input.indexOf(":");
     data.type      = "dialogue";
-    data.character = input.substring(0, index);
-    data.content   = input.substring(index + 1);
+    data.character = input.substr(0, index);
+    data.content   = input.substr(index + 1).trim();
     
     // Merge with previous dialogue if same character
     var previous = Scripts.findOne({_id: Session.get("scriptid")}).elements.pop()
@@ -78,7 +79,7 @@ function insertElement(input) {
       merged = {
         type: "dialogue",
         character: previous.character,
-        content: previous.content + " " +  data.content
+        content: previous.content + "\n" +  data.content
       }
       // Use RPC because minimongo doesn't support the mongo positional operator
       return Meteor.call("updateScriptElement", Session.get("scriptid"), previous, merged); 
@@ -106,17 +107,25 @@ if (typeof String.prototype.endsWith != 'function') {
 
 function separateLines (input, chars) {
   var lines = [];
-  input = input.replace(/(\r\n|\n|\r)/gm,"");
+  input = input.trim();
   while (input.length > chars) {
     var text = input.substr(0, chars);
     var i = text.lastIndexOf(" ");
-    
-    if (i == -1) {
+    var j = text.lastIndexOf("\n");
+        
+    if (i == -1 && j == -1) { 
+      // Force break mid word :(
       i = chars - 1;
     }
+    if (j !== -1 && j < i) {
+      // if newlines in string and before last space
+      k = j;
+    } else {
+      k = i;
+    }
     
-    lines.push(text.substr(0, i));
-    input = input.substr(i + 1);
+    lines.push(text.substr(0, k));
+    input = input.substr(k + 1);
   }
    
   if (input.length > 0) {
