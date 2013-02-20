@@ -62,19 +62,27 @@
     display: none;
   }
   #script {
-    display: block;
+    display:  block;
+    position: relative;
   }
   
   .scriptelement {
     page-break-inside: avoid;
   }
+  
   .scriptelement.slugline {
-    // Prefer to shove slugline on to new page than have it at bottom of page
-    page-break-after: avoid;
+    // Almighty dave says there should always be a page break first... (next selector)
+    // // Prefer to shove slugline on to new page than have it at bottom of page
+    //  page-break-after: avoid;
     
     // PDF bookmarks
     bookmark-level: 1;
     bookmark-state: closed;
+  }
+  .scriptelement.slugline:not(:nth-child(3)) {
+    // Remove blank page
+    position: relative;
+    page-break-before: always;
   }
   
   .coverpage {
