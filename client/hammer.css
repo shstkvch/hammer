@@ -5,10 +5,14 @@ body {
 #script-wrapper {
 	width: 900px;
 	background-color: rgb(255,255,255);
-	margin: 50px auto auto auto;
+	margin: 0 auto;
+	
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
 }
 
-#script-wrapper .container {
+#script-wrapper .nbc {
   width: 768px;
   margin: 20px auto;
   height: 100%;
@@ -21,4 +25,10 @@ body {
   //overflow-y: scroll;
   //height: 350px;
   // temp!
+  color: black;
+}
+
+.container.main {
+  margin-top: 50px;
+  margin-bottom: 20px;
 }

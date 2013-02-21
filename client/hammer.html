@@ -3,50 +3,49 @@
 </head>
 
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar navbar-inverse navbar-fixed-top printhide">
 		<div class="navbar-inner">
 			<div class="container">
 				<a class="brand" href="#">Hammer</a>
 			</div>
 		</div>
 	</div>
-  
-  {{> script}}
-  
+
+  <div class="container main">
+    {{> script}}
+  </div>
 </body>
 
 <template name="script">
+  <h2 class="printhide">{{script.title}}</h2>
 	<div id="script-wrapper">
-		<div class="container" id="script">
-		 <h2 class="printhide">{{script.title}}</h2>
-		 
-		 <div class="coverpage displayhide">
-			<h1 class="title">{{script.title}}</h1>
-		 </div>
-		 
-		 
-		 {{#each script.elements}}
-			<div data-mongo-id="{{this._id}}" class="scriptelement {{this.type}}">
-			  {{#if this.character}}
-				 <div class="scriptelement character">
-					{{this.character}}
-				 </div>
-				 
-				 {{{separateLines this.content 36}}}
-				 
-			  {{else}}
-			  
-				 {{this.content}}
-				 
-			  {{/if}} 
-				
-			</div>
-		 {{/each}}
-		 
-		</div>
-		<div class="container">
-		 <textarea id="scriptinput"></textarea>
-		</div>
+		<div class="nbc" id="script">
+		  <div class="coverpage displayhide">
+			  <h1 class="title">{{script.title}}</h1>
+  	  </div>
+
+      {{#each script.elements}}
+        <div data-mongo-id="{{this._id}}" class="scriptelement {{this.type}}">
+          {{#if this.character}}
+            <div class="scriptelement character">
+              {{this.character}}
+            </div>
+  
+            {{{separateLines this.content 36}}}
+  
+          {{else}}
+  
+            {{this.content}}
+  
+          {{/if}} 
+  
+        </div>
+      {{/each}}
+
+    </div>
+    <div class="nbc">
+      <textarea id="scriptinput"></textarea>
+    </div>
   </div>
 </template>
 

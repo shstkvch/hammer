@@ -1,6 +1,4 @@
 .scriptelement {
-  // height: 20px;  
-  width: 100%;
   margin-left: 0;
   margin-right: 0;
   padding: 5px;
@@ -23,7 +21,8 @@
 
 .scriptelement.dialogue {
 	margin-left: 2.5in;
-	margin-right: 6in;
+	// margin-right: 6in; // wtf dave?!
+	
 }
 
 .scriptelement.character {
@@ -50,8 +49,11 @@
 }
 
 @media print {
-  .container {
+  .nbc {
     display: none;
+  }
+  #script-wrapper {
+    border-style: hidden !important;
   }
   #script {
     display:  block;
