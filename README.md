@@ -1,4 +1,0 @@
-hammer
-======
-
-Revolutionary scriptwriting software
