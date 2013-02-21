@@ -1,0 +1,24 @@
+body {
+	background-color: rgb(240,240,240);
+}
+
+#script-wrapper {
+	width: 900px;
+	background-color: rgb(255,255,255);
+	margin: 50px auto auto auto;
+}
+
+#script-wrapper .container {
+  width: 768px;
+  margin: 20px auto;
+  height: 100%;
+  
+  font-family: sans-serif;
+  color: #000;
+}
+
+#script {
+  //overflow-y: scroll;
+  //height: 350px;
+  // temp!
+}
